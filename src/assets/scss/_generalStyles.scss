@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul,
+ol,
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: $black-c;
+}
+
+.wrapper{
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+}
+
+.container{
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+.main{
+    flex: 1 1 auto;
+}
