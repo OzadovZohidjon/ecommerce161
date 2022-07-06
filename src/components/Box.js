@@ -9,3 +9,16 @@ export const Box = styled.div(
 	flexbox,
 	grid
 )
+
+export const CircleBox = styled(Box)`
+	position: relative;
+	width: ${props => props.w}px;
+	height: ${props => props.h}px;
+	border: 1px solid;
+	border-color: ${props => props.borderColor};
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+`

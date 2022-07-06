@@ -1,15 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { blackColor } from '../../utils/constants'
-import { Box } from '../Box'
-import { Container } from '../Container'
-import { Flex } from '../Flex'
-import ClockIcon from '../icons/ClockIcon'
 import { SemiSpan } from '../Typography'
 import { HeaderTopStyle } from './HeaderElements'
-import VKIcon from '../icons/VKIcon'
-import InstagramIcon from '../icons/InstagramIcon'
-import PersonIcon from '../icons/PersonIcon'
+import {Box, Container, Flex} from '../index'
+import {ClockIcon, InstagramIcon, PersonIcon, VKIcon} from '../icons/index'
 
 function HeaderTop() {
   return (
@@ -67,6 +62,8 @@ function HeaderTop() {
               </Link>
               <Link to='/'>
                 <InstagramIcon/>
+
+                
               </Link>
             </Flex>
 
