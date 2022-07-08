@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import { mainFont } from "../utils/constants";
+import { createGlobalStyle } from 'styled-components'
+import { mainFont } from '../utils/constants'
 
 export const GlobalStyles = createGlobalStyle`
     *{
@@ -19,9 +19,19 @@ export const GlobalStyles = createGlobalStyle`
         color: inherit;
     }
 
+    body{
+        overflow-x: hidden;
+    }
+
     .wrapper{
         position: relative;
         width: 100%;
         min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main{
+        flex: 1 1 auto;
     }
 `

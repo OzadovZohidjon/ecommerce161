@@ -6,6 +6,7 @@ import { GlobalStyles } from "./GlobalStyles";
 import { GlobalFonts } from "./GlobalFonts";
 import { Typography } from "./Typography";
 import { Badge } from "./Badge";
+import { Image } from "./Image";
 import  Title  from "./Title/Title";
 import  ProductsList  from "./ProductsList/ProductList";
 import  ProductCart1  from "./ProductCarts/ProductCart1";
@@ -20,5 +21,6 @@ export {Box,
         Badge,
         Title,
         ProductsList,
-        ProductCart1
+        ProductCart1,
+        Image
     }

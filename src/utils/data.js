@@ -3,9 +3,17 @@ export const products = [
         id: 1,
         name_ru: 'Букет малиновых роз',
         name_uz: 'Букет малиновых роз',
+        description_uz: 'Высота: 60 см, Ширина: 35 см',
+        description_ru: 'Высота: 60 см, Ширина: 35 см',
+        slug: 'buket-malinovix-rozi',
         price: 13499,
         old_price: 15499,
-        images: ['./images/product/product_img_1.png','./images/product/product_img_2.png','./images/product/product_img_3.png','./images/product/product_img_4.png'],
+        images: [
+            './images/product/product_img_1.png',
+            './images/product/product_img_2.png',
+            './images/product/product_img_3.png',
+            './images/product/product_img_4.png',
+        ],
         attributes: [
             {
                 id: 1,
@@ -15,10 +23,10 @@ export const products = [
                     {
                         value_id: 1,
                         value_name_uz: '40 sm',
-                        value_name_ru: '40 см'
-                    }
-                ]
-            }
+                        value_name_ru: '40 см',
+                    },
+                ],
+            },
         ],
     },
     {
@@ -27,7 +35,15 @@ export const products = [
         name_uz: 'Букет малиновых роз',
         price: 13499,
         old_price: 15499,
-        images: ['./images/product/product_img_3.png','./images/product/product_img_4.png','./images/product/product_img_3.png','./images/product/product_img_4.png'],
+        description_uz: 'Высота: 60 см, Ширина: 35 см',
+        description_ru: 'Высота: 60 см, Ширина: 35 см',
+        slug: 'buket-malinovix-rozi',
+        images: [
+            './images/product/product_img_3.png',
+            './images/product/product_img_4.png',
+            './images/product/product_img_3.png',
+            './images/product/product_img_4.png',
+        ],
         attributes: [
             {
                 id: 1,
@@ -37,19 +53,27 @@ export const products = [
                     {
                         value_id: 1,
                         value_name_uz: '40 sm',
-                        value_name_ru: '40 см'
-                    }
-                ]
-            }
+                        value_name_ru: '40 см',
+                    },
+                ],
+            },
         ],
     },
     {
         id: 3,
         name_ru: 'Букет малиновых роз',
         name_uz: 'Букет малиновых роз',
+        description_uz: 'Высота: 60 см, Ширина: 35 см',
+        description_ru: 'Высота: 60 см, Ширина: 35 см',
+        slug: 'buket-malinovix-rozi',
         price: 13499,
         old_price: 15499,
-        images: ['./images/product/product_img_7.png','./images/product/product_img_8.png','./images/product/product_img_3.png','./images/product/product_img_4.png'],
+        images: [
+            './images/product/product_img_7.png',
+            './images/product/product_img_8.png',
+            './images/product/product_img_3.png',
+            './images/product/product_img_4.png',
+        ],
         attributes: [
             {
                 id: 1,
@@ -59,19 +83,27 @@ export const products = [
                     {
                         value_id: 1,
                         value_name_uz: '40 sm',
-                        value_name_ru: '40 см'
-                    }
-                ]
-            }
+                        value_name_ru: '40 см',
+                    },
+                ],
+            },
         ],
     },
     {
         id: 4,
         name_ru: 'Букет малиновых роз',
         name_uz: 'Букет малиновых роз',
+        description_uz: 'Высота: 60 см, Ширина: 35 см',
+        description_ru: 'Высота: 60 см, Ширина: 35 см',
+        slug: 'buket-malinovix-rozi',
         price: 13499,
         old_price: 15499,
-        images: ['./images/product/product_img_5.png','./images/product/product_img_6.png','./images/product/product_img_3.png','./images/product/product_img_4.png'],
+        images: [
+            './images/product/product_img_5.png',
+            './images/product/product_img_6.png',
+            './images/product/product_img_3.png',
+            './images/product/product_img_4.png',
+        ],
         attributes: [
             {
                 id: 1,
@@ -81,10 +113,10 @@ export const products = [
                     {
                         value_id: 1,
                         value_name_uz: '40 sm',
-                        value_name_ru: '40 см'
-                    }
-                ]
-            }
+                        value_name_ru: '40 см',
+                    },
+                ],
+            },
         ],
-    }
+    },
 ]
