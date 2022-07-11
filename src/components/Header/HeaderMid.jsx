@@ -1,6 +1,6 @@
 import React from 'react'
 import { BagIcon, HeartIcon, SearchIcon } from '../icons'
-import { Box, Flex, Container, CircleBox, Badge } from '../index'
+import { Box, Flex, Container, CircleBox, Badge, Button } from '../index'
 import { SemiSpan, Span } from '../Typography'
 import { HeaderMidStyle } from './HeaderElements'
 
@@ -25,7 +25,7 @@ function HeaderMid({ open, setOpen }) {
                             <HeartIcon />
                         </CircleBox>
 
-                        <button onClick={() => setOpen(true)}>
+                        <Button onClick={() => setOpen(true)}>
                             <Flex alignItems='center' gap='15px'>
                                 <CircleBox
                                     w='44px'
@@ -40,7 +40,7 @@ function HeaderMid({ open, setOpen }) {
 
                                 <Span color='#E2195B'>16 500 ₽</Span>
                             </Flex>
-                        </button>
+                        </Button>
                     </Flex>
                 </Flex>
             </Container>

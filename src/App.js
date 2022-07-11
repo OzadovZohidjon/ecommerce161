@@ -6,16 +6,16 @@ import Header from './components/Header/Header'
 import Main from './components/Main/Main'
 import Modal from './components/Modal/Modal'
 
-function App() {
+function App({ store }) {
     const [open, setOpen] = useState(false)
     return (
         <>
             <GlobalStyles />
             <GlobalFonts />
             <Header open={open} setOpen={setOpen} />
-            <Main />
+            <Main products={store.state.products} dispatch={store.dispatch} />
             <Footer />
-            <Modal open={open} setOpen={setOpen} />
+            <Modal dispatch={store.dispatch} products={store.state.cartProducts} open={open} setOpen={setOpen} />
         </>
     )
 }

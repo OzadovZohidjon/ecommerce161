@@ -9,7 +9,7 @@ import {
 } from './ProductCartStyle'
 import { Link } from 'react-router-dom'
 
-function ProductCart1({ product, ...props }) {
+function ProductCart1({ product, dispatch, ...props }) {
     return (
         <ProductCart1Style>
             <Link to={`/product/${product.slug}`}>
@@ -22,31 +22,35 @@ function ProductCart1({ product, ...props }) {
                 </Box>
             </Link>
 
-            <Link to={`/product/${product.slug}`}>
-                <ProductCart1ContentStyle>
-                    <Box>
+            <ProductCart1ContentStyle>
+                <Box>
+                    <Link to={`/product/${product.slug}`}>
                         <H5 mb='10px'>{product.name_uz}</H5>
                         <SemiSpan>{product.description_uz}</SemiSpan>
+                    </Link>
+                </Box>
+
+                <Flex justifyContent='space-between' alignItems='center'>
+                    <Box>
+                        <H5>{product.price}</H5>
+                        <SemiSpan color='#B0B2B9' textDecoration='line-through'>
+                            {product.old_price}
+                        </SemiSpan>
                     </Box>
 
-                    <Flex justifyContent='space-between' alignItems='center'>
-                        <Box>
-                            <H5>{product.price}</H5>
-                            <SemiSpan
-                                color='#B0B2B9'
-                                textDecoration='line-through'
-                            >
-                                {product.old_price}
-                            </SemiSpan>
-                        </Box>
-
-                        <ProductBtn>
-                            <BagIcon />
-                            <SemiSpan>В корзину</SemiSpan>
-                        </ProductBtn>
-                    </Flex>
-                </ProductCart1ContentStyle>
-            </Link>
+                    <ProductBtn
+                        onClick={() =>
+                            dispatch({
+                                type: 'add_to_cart',
+                                action: { id: product.id },
+                            })
+                        }
+                    >
+                        <BagIcon />
+                        <SemiSpan>В корзину</SemiSpan>
+                    </ProductBtn>
+                </Flex>
+            </ProductCart1ContentStyle>
         </ProductCart1Style>
     )
 }

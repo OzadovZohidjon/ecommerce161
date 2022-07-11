@@ -3,10 +3,9 @@ import { Flex, Box } from '../index'
 import { CloseIcon } from '../icons'
 import { H3, H4 } from '../Typography'
 import { ModalPanelMid, ModalPanelStyle, ModalStyle } from './ModalStyle'
-import { products } from '../../utils/data'
 import ProductCart2 from '../ProductCarts/ProductCart2'
 
-function Modal({ open, setOpen }) {
+function Modal({ open, setOpen, products, dispatch }) {
     return (
         <ModalStyle open={open}>
             <ModalPanelStyle open={open}>
@@ -25,7 +24,13 @@ function Modal({ open, setOpen }) {
                 <ModalPanelMid>
                     <Box>
                         {products.map((item, i) => {
-                            return <ProductCart2 key={i} product={item} />
+                            return (
+                                <ProductCart2
+                                    key={i}
+                                    product={item}
+                                    dispatch={dispatch}
+                                />
+                            )
                         })}
                     </Box>
                 </ModalPanelMid>
