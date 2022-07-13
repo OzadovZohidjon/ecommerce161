@@ -4,7 +4,7 @@ import { Flex, Box, Image, Counter, Button } from '../index'
 import { H4, SemiSpan, Span } from '../Typography'
 import { ProductCart2Style } from './ProductCartStyle'
 
-function ProductCart2({ product, dispatch, ...props }) {
+function ProductCart2({ product, store, ...props }) {
     return (
         <ProductCart2Style>
             <Flex gap='10px' borderBottom='1px solid #E2E4EB' pb='24px'>
@@ -22,7 +22,7 @@ function ProductCart2({ product, dispatch, ...props }) {
                         <Span color='#222A46'>{product.name_uz}</Span>
                         <Button
                             onClick={() =>
-                                dispatch({
+                                store.dispatch({
                                     type: 'remove_to_cart',
                                     action: { id: product.id },
                                 })

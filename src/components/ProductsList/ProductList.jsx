@@ -6,7 +6,7 @@ function ProductList({ products, dispatch, ...props }) {
     return (
         <Flex gap='20px'>
             {products.map((item, i) => {
-                return <ProductCart1 dispatch={dispatch} key={i} product={item} />
+                return <ProductCart1 store={dispatch} key={i} product={item} />
             })}
         </Flex>
     )

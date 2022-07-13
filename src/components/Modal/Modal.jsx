@@ -4,8 +4,13 @@ import { CloseIcon } from '../icons'
 import { H3, H4 } from '../Typography'
 import { ModalPanelMid, ModalPanelStyle, ModalStyle } from './ModalStyle'
 import ProductCart2 from '../ProductCarts/ProductCart2'
+import { useContext } from 'react'
+import ModalContext from '../../context/Context'
 
-function Modal({ open, setOpen, products, dispatch }) {
+function Modal({ setOpen, products, dispatch }) {
+    let store = useContext(ModalContext)
+    let { open } = store.getState()
+    console.log(dispatch)
     return (
         <ModalStyle open={open}>
             <ModalPanelStyle open={open}>
@@ -16,7 +21,7 @@ function Modal({ open, setOpen, products, dispatch }) {
                     borderBottom='1px solid#E2E4EB'
                 >
                     <H4>Корзина</H4>
-                    <button onClick={() => setOpen(false)}>
+                    <button onClick={() => store.dispatch({ type: 'close' })}>
                         <CloseIcon />
                     </button>
                 </Flex>
@@ -28,7 +33,7 @@ function Modal({ open, setOpen, products, dispatch }) {
                                 <ProductCart2
                                     key={i}
                                     product={item}
-                                    dispatch={dispatch}
+                                    store={dispatch}
                                 />
                             )
                         })}

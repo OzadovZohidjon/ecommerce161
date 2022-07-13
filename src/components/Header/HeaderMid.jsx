@@ -1,10 +1,13 @@
 import React from 'react'
+import { useContext } from 'react'
+import Context from '../../context/Context'
 import { BagIcon, HeartIcon, SearchIcon } from '../icons'
 import { Box, Flex, Container, CircleBox, Badge, Button } from '../index'
 import { SemiSpan, Span } from '../Typography'
 import { HeaderMidStyle } from './HeaderElements'
 
 function HeaderMid({ open, setOpen }) {
+    const store = useContext(Context)
     return (
         <HeaderMidStyle>
             <Container>
@@ -25,7 +28,9 @@ function HeaderMid({ open, setOpen }) {
                             <HeartIcon />
                         </CircleBox>
 
-                        <Button onClick={() => setOpen(true)}>
+                        <Button
+                            onClick={() => store.dispatch({ type: 'open' })}
+                        >
                             <Flex alignItems='center' gap='15px'>
                                 <CircleBox
                                     w='44px'

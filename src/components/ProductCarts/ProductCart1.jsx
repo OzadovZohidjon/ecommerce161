@@ -9,7 +9,7 @@ import {
 } from './ProductCartStyle'
 import { Link } from 'react-router-dom'
 
-function ProductCart1({ product, dispatch, ...props }) {
+function ProductCart1({ product, store, ...props }) {
     return (
         <ProductCart1Style>
             <Link to={`/product/${product.slug}`}>
@@ -40,9 +40,9 @@ function ProductCart1({ product, dispatch, ...props }) {
 
                     <ProductBtn
                         onClick={() =>
-                            dispatch({
+                            store.dispatch({
                                 type: 'add_to_cart',
-                                action: { id: product.id },
+                                action: { product: product },
                             })
                         }
                     >

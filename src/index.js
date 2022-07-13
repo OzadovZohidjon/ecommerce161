@@ -3,15 +3,20 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import { store } from './utils/data'
+import Context from './context/Context'
 
 const root = ReactDOM.createRoot(document.querySelector('.wrapper'))
 
-export function reRender() {
+function reRender() {
     root.render(
-        <BrowserRouter>
-            <App store={store} />
-        </BrowserRouter>
+        <Context.Provider value={store}>
+            <BrowserRouter>
+                <App store={store} />
+            </BrowserRouter>
+        </Context.Provider>
     )
 }
 
 reRender()
+
+store.subscribe(reRender)

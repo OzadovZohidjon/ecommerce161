@@ -1,7 +1,8 @@
-import { reRender } from '..'
+import cartReducer from './reducers/cartReducer'
+import modalReducer from './reducers/modalReducer'
 
 export const store = {
-    state: {
+    _state: {
         products: [
             {
                 id: 1,
@@ -125,27 +126,25 @@ export const store = {
             },
         ],
         cartProducts: [],
+        open: false,
     },
 
-    dispatch({ type, action }) {
-        if (type === 'add_to_cart') {
-            let product = {}
-            store.state.products.forEach((item) => {
-                if (item.id === action.id) {
-                    product = {
-                        ...item,
-                        qty: 1,
-                    }
-                }
-            })
-            store.state.cartProducts.push(product)
-        } else if (type === 'remove_to_cart') {
-            store.state.cartProducts = store.state.cartProducts.filter(
-                (item) => item.id !== action.id
-            )
-        }
-        reRender()
+    _render() {
+        console.log('render')
+    },
+    
+    getState() {
+        return this._state
     },
 
-    subscribe() {},
+    dispatch(action) {
+        console.log(this._state)
+
+        this._state.cartProducts = cartReducer(this._state.cartProducts, action)
+        this._state.open = modalReducer(this._state.open, action)
+        this._render()
+    },
+    subscribe(observer) {
+        this._render = observer
+    },
 }

@@ -13,9 +13,14 @@ function App({ store }) {
             <GlobalStyles />
             <GlobalFonts />
             <Header open={open} setOpen={setOpen} />
-            <Main products={store.state.products} dispatch={store.dispatch} />
+            <Main products={store.getState().products} dispatch={store} />
             <Footer />
-            <Modal dispatch={store.dispatch} products={store.state.cartProducts} open={open} setOpen={setOpen} />
+            <Modal
+                dispatch={store}
+                products={store.getState().cartProducts}
+                open={open}
+                setOpen={setOpen}
+            />
         </>
     )
 }
