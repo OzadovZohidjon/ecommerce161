@@ -9,7 +9,7 @@ import {
 } from './ProductCartStyle'
 import { Link } from 'react-router-dom'
 
-function ProductCart1({ product, store, ...props }) {
+function ProductCart1({ product, addToCart, ...props }) {
     return (
         <ProductCart1Style>
             <Link to={`/product/${product.slug}`}>
@@ -38,14 +38,7 @@ function ProductCart1({ product, store, ...props }) {
                         </SemiSpan>
                     </Box>
 
-                    <ProductBtn
-                        onClick={() =>
-                            store.dispatch({
-                                type: 'add_to_cart',
-                                action: { product: product },
-                            })
-                        }
-                    >
+                    <ProductBtn onClick={() => addToCart(product)}>
                         <BagIcon />
                         <SemiSpan>В корзину</SemiSpan>
                     </ProductBtn>

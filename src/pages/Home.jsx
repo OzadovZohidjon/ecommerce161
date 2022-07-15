@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Box, Container, Title } from '../components'
 import ProductList from '../components/ProductsList/ProductList'
+import Context from '../context/Context'
+import { addToCartAC } from '../utils/reducers/cartReducer'
 
-export default function Home({ products, dispatch }) {
+export default function Home() {
+    const store = useContext(Context)
+    const { products } = store.getState()
+    function addToCart(product) {
+        store.dispatch(addToCartAC(product))
+    }
     return (
         <>
             <Container>
@@ -11,7 +18,7 @@ export default function Home({ products, dispatch }) {
                         title='Букеты цветов с доставкой'
                         path='/category/1'
                     />
-            <ProductList dispatch={ dispatch}  products={products} />
+                    <ProductList addToCart={addToCart} products={products} />
                 </Box>
             </Container>
         </>

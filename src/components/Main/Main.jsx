@@ -1,9 +1,8 @@
 import React from 'react'
 import { routes } from '../../utils/routes'
 import { Routes, Route } from 'react-router-dom'
-import Home from '../../pages/Home'
 
-function Main({ products, dispatch }) {
+function Main() {
     return (
         <main className='main'>
             <Routes>
@@ -16,10 +15,6 @@ function Main({ products, dispatch }) {
                         />
                     )
                 })}
-                <Route
-                    path='/'
-                    element={<Home products={products} dispatch={dispatch} />}
-                />
             </Routes>
         </main>
     )

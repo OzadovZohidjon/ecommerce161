@@ -58,3 +58,4 @@ export const ProductBtn = styled.button`
 export const ProductCart2Style = styled.div`
     padding: 20px;
 `
+export const ProductCart3Style = styled.div``

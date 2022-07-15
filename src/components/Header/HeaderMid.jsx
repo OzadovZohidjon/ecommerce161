@@ -1,19 +1,23 @@
-import React from 'react'
-import { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Context from '../../context/Context'
+import { sumAllPrice, sumQuantity } from '../../utils/helpers'
 import { BagIcon, HeartIcon, SearchIcon } from '../icons'
 import { Box, Flex, Container, CircleBox, Badge, Button } from '../index'
-import { SemiSpan, Span } from '../Typography'
+import { Span } from '../Typography'
 import { HeaderMidStyle } from './HeaderElements'
 
-function HeaderMid({ open, setOpen }) {
+function HeaderMid() {
     const store = useContext(Context)
+    const { cartProducts } = store.getState()
     return (
         <HeaderMidStyle>
             <Container>
                 <Flex alignItems='center' justifyContent='space-between'>
                     <Box>
-                        <img src='./images/logo.svg' alt='Logo' />
+                        <Link to='/'>
+                            <img src='./images/logo.svg' alt='Logo' />
+                        </Link>
                     </Box>
 
                     <Flex>
@@ -37,13 +41,18 @@ function HeaderMid({ open, setOpen }) {
                                     h='44px'
                                     borderColor='#E2E4EB'
                                 >
-                                    <Badge>
-                                        <SemiSpan color='#fff'>2</SemiSpan>
-                                    </Badge>
+                                    {cartProducts.length > 0 ? (
+                                        <Badge
+                                            qty={sumQuantity(cartProducts)}
+                                        />
+                                    ) : null}
                                     <BagIcon />
                                 </CircleBox>
-
-                                <Span color='#E2195B'>16 500 ₽</Span>
+                                {cartProducts.length > 0 ? (
+                                    <Span color='#E2195B'>
+                                        {sumAllPrice(cartProducts)}₽
+                                    </Span>
+                                ) : null}
                             </Flex>
                         </Button>
                     </Flex>

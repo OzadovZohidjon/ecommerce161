@@ -1,11 +1,12 @@
 import React from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react'
 import { Button } from '../Button'
 import { H5 } from '../Typography'
 import { CounterStyle } from './CounterStyle'
 
 function Counter({ qty, ...props }) {
-    const [count, setCount] = useState(qty)
+    const [count, setCount] = useState(1)
     function Increment() {
         setCount(count + 1)
     }
@@ -17,6 +18,11 @@ function Counter({ qty, ...props }) {
             setCount(count - 1)
         }
     }
+
+    useEffect(() => {
+        setCount(qty)
+    }, [qty])
+
     return (
         <CounterStyle>
             <Button

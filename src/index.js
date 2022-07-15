@@ -9,11 +9,11 @@ const root = ReactDOM.createRoot(document.querySelector('.wrapper'))
 
 function reRender() {
     root.render(
-        <Context.Provider value={store}>
-            <BrowserRouter>
-                <App store={store} />
-            </BrowserRouter>
-        </Context.Provider>
+        <BrowserRouter>
+            <Context.Provider value={store}>
+                <App />
+            </Context.Provider>
+        </BrowserRouter>
     )
 }
 

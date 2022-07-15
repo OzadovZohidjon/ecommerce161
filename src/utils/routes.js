@@ -6,11 +6,11 @@ import Product from '../pages/Product'
 import { Navigate } from 'react-router-dom'
 
 export const routes = [
-    // {
-    //     id: 1,
-    //     path: '/',
-    //     component: <Home/>
-    // },
+    {
+        id: 1,
+        path: '/',
+        component: <Home />,
+    },
     {
         id: 2,
         path: '/category/:slug',

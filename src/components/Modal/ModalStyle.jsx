@@ -20,6 +20,19 @@ export const ModalPanelStyle = styled.div`
     display: flex;
     flex-direction: column;
     transition: all 0.3s ease;
+
+    button {
+        background: #fff;
+        border: 1px solid #d0d2d7;
+        border-radius: 5px;
+        padding: 13px 20px;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: #0093a2;
+            color: #fff;
+        }
+    }
 `
 
 export const ModalPanelMid = styled.div`

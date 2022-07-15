@@ -1,16 +1,16 @@
-import React from 'react'
-import { Flex, Box } from '../index'
+import React, { useContext } from 'react'
+import { Flex, Box, Button } from '../index'
 import { CloseIcon } from '../icons'
-import { H3, H4 } from '../Typography'
+import { H3, H4, Span } from '../Typography'
 import { ModalPanelMid, ModalPanelStyle, ModalStyle } from './ModalStyle'
 import ProductCart2 from '../ProductCarts/ProductCart2'
-import { useContext } from 'react'
-import ModalContext from '../../context/Context'
+import Context from '../../context/Context'
+import { sumAllPrice } from '../../utils/helpers'
+import { Link } from 'react-router-dom'
 
-function Modal({ setOpen, products, dispatch }) {
-    let store = useContext(ModalContext)
-    let { open } = store.getState()
-    console.log(dispatch)
+function Modal() {
+    let store = useContext(Context)
+    let { open, cartProducts } = store.getState()
     return (
         <ModalStyle open={open}>
             <ModalPanelStyle open={open}>
@@ -28,14 +28,8 @@ function Modal({ setOpen, products, dispatch }) {
 
                 <ModalPanelMid>
                     <Box>
-                        {products.map((item, i) => {
-                            return (
-                                <ProductCart2
-                                    key={i}
-                                    product={item}
-                                    store={dispatch}
-                                />
-                            )
+                        {cartProducts.map((item, i) => {
+                            return <ProductCart2 key={i} product={item} />
                         })}
                     </Box>
                 </ModalPanelMid>
@@ -47,7 +41,7 @@ function Modal({ setOpen, products, dispatch }) {
                         p='20px'
                     >
                         <H3 color='#1B1C21'>Итого:</H3>
-                        <H3 color='#1B1C21'>18 230 ₽</H3>
+                        <H3 color='#1B1C21'>{sumAllPrice(cartProducts)} ₽</H3>
                     </Flex>
 
                     <Flex
@@ -56,8 +50,18 @@ function Modal({ setOpen, products, dispatch }) {
                         p='20px'
                         backgroundColor='#F2F6F7'
                     >
-                        <button>Продолжить покупки</button>
-                        <button>Оформить заказ</button>
+                        <Button
+                            onClick={() => store.dispatch({ type: 'close' })}
+                        >
+                            <Span>Продолжить покупки</Span>
+                        </Button>
+                        <Button
+                            onClick={() => store.dispatch({ type: 'close' })}
+                        >
+                            <Link to='/cart'>
+                                <Span>Оформить заказ</Span>
+                            </Link>
+                        </Button>
                     </Flex>
                 </Box>
             </ModalPanelStyle>

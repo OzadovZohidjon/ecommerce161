@@ -132,14 +132,12 @@ export const store = {
     _render() {
         console.log('render')
     },
-    
+
     getState() {
         return this._state
     },
 
     dispatch(action) {
-        console.log(this._state)
-
         this._state.cartProducts = cartReducer(this._state.cartProducts, action)
         this._state.open = modalReducer(this._state.open, action)
         this._render()
