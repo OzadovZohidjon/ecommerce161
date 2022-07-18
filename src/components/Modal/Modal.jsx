@@ -7,10 +7,18 @@ import ProductCart2 from '../ProductCarts/ProductCart2'
 import Context from '../../context/Context'
 import { sumAllPrice } from '../../utils/helpers'
 import { Link } from 'react-router-dom'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { removeToCartAC } from '../../utils/reducers/cartReducer'
 function Modal() {
-    let store = useContext(Context)
-    let { open, cartProducts } = store.getState()
+    const { open, cartProducts } = useSelector((state) => state)
+    const dispatch = useDispatch()
+    function modalHandler() {
+        dispatch({ type: 'close' })
+    }
+
+    function removeToCart(id) {
+        dispatch(removeToCartAC(id))
+    }
     return (
         <ModalStyle open={open}>
             <ModalPanelStyle open={open}>
@@ -21,7 +29,7 @@ function Modal() {
                     borderBottom='1px solid#E2E4EB'
                 >
                     <H4>Корзина</H4>
-                    <button onClick={() => store.dispatch({ type: 'close' })}>
+                    <button onClick={() => modalHandler()}>
                         <CloseIcon />
                     </button>
                 </Flex>
@@ -29,7 +37,13 @@ function Modal() {
                 <ModalPanelMid>
                     <Box>
                         {cartProducts.map((item, i) => {
-                            return <ProductCart2 key={i} product={item} />
+                            return (
+                                <ProductCart2
+                                    key={i}
+                                    product={item}
+                                    removeToCart={removeToCart}
+                                />
+                            )
                         })}
                     </Box>
                 </ModalPanelMid>
@@ -50,14 +64,10 @@ function Modal() {
                         p='20px'
                         backgroundColor='#F2F6F7'
                     >
-                        <Button
-                            onClick={() => store.dispatch({ type: 'close' })}
-                        >
+                        <Button onClick={() => modalHandler()}>
                             <Span>Продолжить покупки</Span>
                         </Button>
-                        <Button
-                            onClick={() => store.dispatch({ type: 'close' })}
-                        >
+                        <Button onClick={() => modalHandler()}>
                             <Link to='/cart'>
                                 <Span>Оформить заказ</Span>
                             </Link>

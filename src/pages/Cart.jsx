@@ -1,15 +1,15 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Box, Container, Flex, Title, Button } from '../components'
 import ProductListColumn from '../components/ProductsList/ProductListColumn'
 import { Span } from '../components/Typography'
-import Context from '../context/Context'
 import { removeToCartAC } from '../utils/reducers/cartReducer'
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function Cart() {
-    const store = useContext(Context)
-    const { cartProducts } = store.getState()
+    const { cartProducts } = useSelector((state) => state)
+    const dispatch = useDispatch()
     function removeToCart(id) {
-        store.dispatch(removeToCartAC(id))
+        dispatch(removeToCartAC(id))
     }
     return (
         <>

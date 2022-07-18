@@ -133,7 +133,7 @@ export const store = {
         console.log('render')
     },
 
-    getState() {
+    getState() {    
         return this._state
     },
 

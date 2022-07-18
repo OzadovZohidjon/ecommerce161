@@ -1,15 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import Context from '../../context/Context'
 import { sumAllPrice, sumQuantity } from '../../utils/helpers'
 import { BagIcon, HeartIcon, SearchIcon } from '../icons'
 import { Box, Flex, Container, CircleBox, Badge, Button } from '../index'
 import { Span } from '../Typography'
 import { HeaderMidStyle } from './HeaderElements'
+import { useSelector, useDispatch } from 'react-redux'
 
 function HeaderMid() {
-    const store = useContext(Context)
-    const { cartProducts } = store.getState()
+    const { cartProducts } = useSelector((state) => state)
+    const dispatch = useDispatch()
+    function modalHandler() {
+        dispatch({ type: 'open' })
+    }
     return (
         <HeaderMidStyle>
             <Container>
@@ -32,9 +35,7 @@ function HeaderMid() {
                             <HeartIcon />
                         </CircleBox>
 
-                        <Button
-                            onClick={() => store.dispatch({ type: 'open' })}
-                        >
+                        <Button onClick={() => modalHandler()}>
                             <Flex alignItems='center' gap='15px'>
                                 <CircleBox
                                     w='44px'

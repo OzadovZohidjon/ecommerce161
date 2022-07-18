@@ -1,12 +1,10 @@
-import React, { useContext } from 'react'
-import Context from '../../context/Context'
+import React from 'react'
 import { CloseIcon } from '../icons'
 import { Flex, Box, Image, Counter, Button } from '../index'
 import { H4, SemiSpan, Span } from '../Typography'
 import { ProductCart2Style } from './ProductCartStyle'
 
-function ProductCart2({ product, ...props }) {
-    const store = useContext(Context)
+function ProductCart2({ product, removeToCart, ...props }) {
     return (
         <ProductCart2Style>
             <Flex gap='10px' borderBottom='1px solid #E2E4EB' pb='24px'>
@@ -22,14 +20,7 @@ function ProductCart2({ product, ...props }) {
                 <Box flex='1 1 auto'>
                     <Flex justifyContent='space-between' mb='5px'>
                         <Span color='#222A46'>{product.name_uz}</Span>
-                        <Button
-                            onClick={() =>
-                                store.dispatch({
-                                    type: 'remove_to_cart',
-                                    action: { id: product.id },
-                                })
-                            }
-                        >
+                        <Button onClick={() => removeToCart(product.id)}>
                             <CloseIcon />
                         </Button>
                     </Flex>
