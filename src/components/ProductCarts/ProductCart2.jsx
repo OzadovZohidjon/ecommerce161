@@ -1,10 +1,22 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { incrementAC, decrementAC } from '../../redux/reducers/cartReducer'
 import { CloseIcon } from '../icons'
 import { Flex, Box, Image, Counter, Button } from '../index'
 import { H4, SemiSpan, Span } from '../Typography'
 import { ProductCart2Style } from './ProductCartStyle'
 
 function ProductCart2({ product, removeToCart, ...props }) {
+    const dispatch = useDispatch()
+
+    function increment() {
+        dispatch(incrementAC(product.id))
+    }
+
+    function decrement() {
+        dispatch(decrementAC(product.id))
+    }
+
     return (
         <ProductCart2Style>
             <Flex gap='10px' borderBottom='1px solid #E2E4EB' pb='24px'>
@@ -32,7 +44,11 @@ function ProductCart2({ product, removeToCart, ...props }) {
                     </Box>
 
                     <Flex gap='24px'>
-                        <Counter qty={product.qty} />
+                        <Counter
+                            qty={product.qty}
+                            increment={increment}
+                            decrement={decrement}
+                        />
                         <H4>{product.price.toLocaleString()} ₽</H4>
                     </Flex>
                 </Box>

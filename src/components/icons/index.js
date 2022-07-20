@@ -7,6 +7,7 @@ import HeartIcon from './HeartIcon'
 import BagIcon from './BagIcon'
 import ArrowRightIcon from './ArrowRightIcon'
 import CloseIcon from './CloseIcon'
+import ArrowDown from './ArrowDown'
 
 export {
     ClockIcon,
@@ -18,4 +19,5 @@ export {
     HeartIcon,
     BagIcon,
     ArrowRightIcon,
+    ArrowDown,
 }

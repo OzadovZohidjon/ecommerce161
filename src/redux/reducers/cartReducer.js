@@ -1,3 +1,6 @@
+const ADD_ONE = 'add_one'
+const REMOVE_ONE = 'remove_one'
+
 let initialState = []
 
 function cartReducer(state = initialState, action) {
@@ -13,8 +16,24 @@ function cartReducer(state = initialState, action) {
                 : [...state, { ...action.product, qty: 1 }]
             console.log(newState)
             return newState
+
+        case ADD_ONE:
+            state = state.map((item) =>
+                item.id === action.id ? { ...item, qty: item.qty + 1 } : item
+            )
+            return state
+
+        case REMOVE_ONE:
+            state = state.map((item) =>
+                item.id === action.id
+                    ? { ...item, qty: item.qty === 1 ? 1 : item.qty - 1 }
+                    : item
+            )
+            return state
+
         case 'remove_to_cart':
             return (state = state.filter((item) => item.id !== action.id))
+
         default:
             return state
     }
@@ -33,4 +52,19 @@ export function removeToCartAC(id) {
         id: id,
     }
 }
+
+export function incrementAC(id) {
+    return {
+        type: ADD_ONE,
+        id: id,
+    }
+}
+
+export function decrementAC(id) {
+    return {
+        type: REMOVE_ONE,
+        id: id,
+    }
+}
+
 export default cartReducer
