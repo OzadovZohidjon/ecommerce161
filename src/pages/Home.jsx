@@ -18,7 +18,11 @@ export default function Home() {
                         title='Букеты цветов с доставкой'
                         path='/category/1'
                     />
-                    <ProductList addToCart={addToCart} products={products} />
+                    <ProductList
+                        col={4}
+                        addToCart={addToCart}
+                        products={products}
+                    />
                 </Box>
             </Container>
         </>

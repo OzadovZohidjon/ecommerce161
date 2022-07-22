@@ -1,12 +1,23 @@
-const SET_CATEGORIES = 'set_categories'
+import axios from 'axios'
 
-const initialState = []
+const SET_CATEGORIES = 'set_categories'
+const SET_LOADING = 'set_loading'
+
+const initialState = {
+    items: [],
+    loading: false,
+}
 
 function categoriesReducer(state = initialState, action) {
     switch (action.type) {
         case SET_CATEGORIES:
-            state = action.items
+            state.items = action.items
             return state
+
+        case SET_LOADING:
+            state.loading = action.loading
+            return state
+
         default:
             return state
     }
@@ -19,17 +30,27 @@ export function setCategoriesAC(items) {
     }
 }
 
-// export function getCategories() {
-//     setLoading(true)
-//     axios
-//         .get('https://ecommerce.main-gate.appx.uz/dev/v1/category/list')
-//         .then(function (response) {
-//             dispatch(setCategoriesAC(response.data.categories))
-//             setLoading(false)
-//         })
-//         .catch(function (error) {
-//             console.log(error)
-//         })
-// }
+export function setLoadingAC(loading) {
+    return {
+        type: SET_LOADING,
+        loading: loading,
+    }
+}
+
+export function getCategories() {
+    return async function (dispatch) {
+        dispatch(setLoadingAC(true))
+        axios
+            .get('https://ecommerce.main-gate.appx.uz/dev/v1/category/list')
+            .then(function (response) {
+                dispatch(setCategoriesAC(response.data.categories))
+                dispatch(setLoadingAC(false))
+            })
+            .catch(function (error) {
+                console.log(error)
+                dispatch(setLoadingAC(false))
+            })
+    }
+}
 
 export default categoriesReducer

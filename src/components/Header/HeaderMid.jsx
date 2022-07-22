@@ -6,6 +6,7 @@ import { Box, Flex, Container, CircleBox, Badge, Button } from '../index'
 import { Span } from '../Typography'
 import { HeaderMidStyle } from './HeaderElements'
 import { useSelector, useDispatch } from 'react-redux'
+import logo from '../../assets/images/logo.svg'
 
 function HeaderMid() {
     const { cartProducts } = useSelector((state) => state)
@@ -19,7 +20,7 @@ function HeaderMid() {
                 <Flex alignItems='center' justifyContent='space-between'>
                     <Box>
                         <Link to='/'>
-                            <img src='./images/logo.svg' alt='Logo' />
+                            <img src={logo} alt='Logo' />
                         </Link>
                     </Box>
 

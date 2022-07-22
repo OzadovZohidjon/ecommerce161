@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom'
 
 function ProductCart1({ product, addToCart, ...props }) {
     return (
-        <ProductCart1Style>
+        <ProductCart1Style col={props.col}>
             <Link to={`/product/${product.slug}`}>
                 <Box h='60%'>
                     <Image

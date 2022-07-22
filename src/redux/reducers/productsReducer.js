@@ -1,3 +1,5 @@
+import { images } from '../../utils/data'
+
 let initialState = [
     {
         id: 1,
@@ -9,10 +11,10 @@ let initialState = [
         price: 13499,
         old_price: 15499,
         images: [
-            './images/product/product_img_1.png',
-            './images/product/product_img_2.png',
-            './images/product/product_img_3.png',
-            './images/product/product_img_4.png',
+            images.product_img_1,
+            images.product_img_2,
+            images.product_img_3,
+            images.product_img_4,
         ],
         attributes: [
             {
@@ -39,10 +41,10 @@ let initialState = [
         description_ru: 'Высота: 60 см, Ширина: 35 см',
         slug: 'buket-malinovix-rozi',
         images: [
-            './images/product/product_img_3.png',
-            './images/product/product_img_4.png',
-            './images/product/product_img_3.png',
-            './images/product/product_img_4.png',
+            images.product_img_5,
+            images.product_img_4,
+            images.product_img_3,
+            images.product_img_4,
         ],
         attributes: [
             {
@@ -69,10 +71,10 @@ let initialState = [
         price: 13499,
         old_price: 15499,
         images: [
-            './images/product/product_img_7.png',
-            './images/product/product_img_8.png',
-            './images/product/product_img_3.png',
-            './images/product/product_img_4.png',
+            images.product_img_7,
+            images.product_img_8,
+            images.product_img_4,
+            images.product_img_3,
         ],
         attributes: [
             {
@@ -99,10 +101,10 @@ let initialState = [
         price: 13499,
         old_price: 15499,
         images: [
-            './images/product/product_img_5.png',
-            './images/product/product_img_6.png',
-            './images/product/product_img_3.png',
-            './images/product/product_img_4.png',
+            images.product_img_5,
+            images.product_img_6,
+            images.product_img_3,
+            images.product_img_4,
         ],
         attributes: [
             {

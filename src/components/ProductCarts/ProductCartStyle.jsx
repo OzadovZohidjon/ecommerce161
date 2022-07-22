@@ -3,9 +3,11 @@ import styled from 'styled-components'
 export const ProductCart1Style = styled.div`
     position: relative;
     height: 430px;
-    width: 24%;
+    width: ${(props) => 100 / props.col}%;
     border-radius: 5px;
     overflow: hidden;
+    padding: 0 10px;
+    margin-bottom: 20px;
 `
 
 export const ProductCart1ContentStyle = styled.div`

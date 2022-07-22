@@ -5,34 +5,18 @@ import axios from 'axios'
 import { H4, Span } from '../Typography'
 import { Link } from 'react-router-dom'
 import { ArrowDown } from '../icons'
-import { setCategoriesAC } from '../../redux/reducers/categoriesReducer'
+import {
+    getCategories,
+    setCategoriesAC,
+} from '../../redux/reducers/categoriesReducer'
 import { useDispatch, useSelector } from 'react-redux'
 
 function HeaderBottom() {
-    const [loading, setLoading] = useState(false)
-    const { categories } = useSelector((state) => state)
+    const { items, loading } = useSelector((state) => state.categories)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        setLoading(true)
-        axios
-            .get('https://ecommerce.main-gate.appx.uz/dev/v1/category/list')
-            .then(function (response) {
-                dispatch(setCategoriesAC(response.data.categories))
-                setLoading(false)
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
-        axios
-            .get('https://ecommerce.main-gate.appx.uz/dev/v1/product/list')
-            .then(function (response) {
-                console.log(response.data)
-                setLoading(false)
-            })
-            .catch(function (error) {
-                console.log(error)
-            })
+        dispatch(getCategories())
     }, [])
 
     return (
@@ -42,7 +26,7 @@ function HeaderBottom() {
                     <Span>Loading...</Span>
                 ) : (
                     <Flex gap='40px'>
-                        {categories.map((item, i) => {
+                        {items.map((item, i) => {
                             return (
                                 <Link key={i} to={`/category/${item.slug}`}>
                                     {item.children.length > 0 ? (
