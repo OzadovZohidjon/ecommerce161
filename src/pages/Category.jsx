@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import {
     Container,
@@ -11,23 +11,16 @@ import {
     ProductsList,
 } from '../components/index'
 import { H3, SemiSpan } from '../components/Typography'
+import { getCategorie } from '../redux/reducers/categoriesReducer'
 
 export default function Category() {
     const { products } = useSelector((state) => state)
-    // const location = useLocation()
+    const location = useLocation()
+    const dispatch = useDispatch()
 
-    // useEffect(() => {
-    //     axios
-    //         .get(
-    //             `https://ecommerce.main-gate.appx.uz/dev/v1/category/${
-    //                 location.pathname.split('/')[2]
-    //             }`
-    //         )
-    //         .then((response) => {
-    //             console.log(response.data)
-    //         })
-    //         .catch((error) => console.log(error))
-    // }, [location])
+    useEffect(() => {
+        dispatch(getCategorie(location.pathname.split('/')[2]))
+    }, [location])
 
     const items = [
         {
@@ -83,7 +76,7 @@ export default function Category() {
                     </Flex>
 
                     <Box>
-                        <ProductsList products={products} col={3} />
+                        {/* <ProductsList products={products} col={3} /> */}
                     </Box>
                 </Box>
             </Flex>

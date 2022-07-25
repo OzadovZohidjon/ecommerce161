@@ -1,70 +1,80 @@
-import { images } from '../../utils/data'
+import axios from 'axios'
 
 const SET_PRODUCT = 'set_product'
+const SET_LOADING = 'set_loading'
+const SET_ATTRIBUTES = 'set_attributes'
 
 const initialState = {
-    id: 1,
-    name_ru: 'Букет малиновых роз',
-    name_uz: 'Букет малиновых роз',
-    description_uz:
-        '<p>Высота: <strong>60 см</strong>, &nbsp;&nbsp;&nbsp;&nbsp; Ширина: <strong>35 см</strong></p>',
-    description_ru:
-        '<p>Высота: <strong>60 см</strong>, Ширина: <strong>35 см</strong></p>',
-    slug: 'buket-malinovix-rozi',
-    price: 13499,
-    old_price: 15499,
-    images: [
-        images.product_img_1,
-        images.product_img_2,
-        images.product_img_3,
-        images.product_img_4,
-    ],
-    attributes: [
-        {
-            id: 1,
-            attribute_name_uz: 'Длина',
-            attribute_name_ru: 'Длина',
-            values: [
-                {
-                    value_id: 1,
-                    value_name_uz: '40 sm',
-                    value_name_ru: '40 см',
-                },
-            ],
-        },
-        {
-            id: 2,
-            attribute_name_uz: 'Упаковка',
-            attribute_name_ru: 'Упаковка',
-            values: [
-                {
-                    value_id: 1,
-                    value_name_uz: 'Ленточка',
-                    value_name_ru: 'Ленточка',
-                },
-                {
-                    value_id: 2,
-                    value_name_uz: 'Крафт (+290₽)',
-                    value_name_ru: 'Крафт (+290₽)',
-                },
-                {
-                    value_id: 3,
-                    value_name_uz: 'Корейская (+390₽)',
-                    value_name_ru: 'Корейская (+390₽)',
-                },
-            ],
-        },
-    ],
+    product: {},
+    attributes: [],
+    loading: true,
 }
-
 function productReducer(state = initialState, action) {
     switch (action.type) {
         case SET_PRODUCT:
-            return state
+            return { ...state, product: action.item }
+
+        case SET_LOADING:
+            return { ...state, loading: action.loading }
+
+        case SET_ATTRIBUTES:
+            return { ...state, attributes: action.attributes }
 
         default:
             return state
     }
 }
 
+export function setProductAC(item) {
+    return {
+        type: SET_PRODUCT,
+        item,
+    }
+}
+
+export function setLoadingAC(loading) {
+    return {
+        type: SET_LOADING,
+        loading: loading,
+    }
+}
+
+export function setAttributesAC(attributes) {
+    return {
+        type: SET_ATTRIBUTES,
+        attributes: attributes,
+    }
+}
+
+export function getProduct(slug) {
+    return async function (dispatch) {
+        dispatch(setLoadingAC(true))
+        axios
+            .get(`https://ecommerce.main-gate.appx.uz/dev/v1/product/${slug}`)
+            .then(function (response) {
+                dispatch(setProductAC(response.data.product))
+                dispatch(setLoadingAC(false))
+            })
+            .catch(function (error) {
+                console.log(error)
+                dispatch(setLoadingAC(false))
+            })
+    }
+}
+
+export function getAttributes() {
+    return async function (dispatch) {
+        dispatch(setLoadingAC(true))
+        axios
+            .get(`https://ecommerce.main-gate.appx.uz/dev/v1/attribute/list`)
+            .then(function (response) {
+                dispatch(setAttributesAC(response.data.attributes))
+                dispatch(setLoadingAC(false))
+            })
+            .catch(function (error) {
+                console.log(error)
+                dispatch(setLoadingAC(false))
+            })
+    }
+}
 export default productReducer

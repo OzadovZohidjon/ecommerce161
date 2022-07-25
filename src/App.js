@@ -12,7 +12,7 @@ function App() {
     return (
         <>
             <GlobalStyles />
-            <GlobalFonts />
+            <GlobalFonts />     
             <Header />
             <Main />
             <Footer />

@@ -5,18 +5,20 @@ const SET_LOADING = 'set_loading'
 
 const initialState = {
     items: [],
+    categoryAttributes: [],
+    subCats: [],
+    products: [],
+    pagination: {},
     loading: false,
 }
 
 function categoriesReducer(state = initialState, action) {
     switch (action.type) {
         case SET_CATEGORIES:
-            state.items = action.items
-            return state
+            return { ...state, items: action.items }
 
         case SET_LOADING:
-            state.loading = action.loading
-            return state
+            return { ...state, loading: action.loading }
 
         default:
             return state
@@ -50,6 +52,17 @@ export function getCategories() {
                 console.log(error)
                 dispatch(setLoadingAC(false))
             })
+    }
+}
+
+export function getCategorie(slug) {
+    return async function (dispatch) {
+        axios
+            .get(`https://ecommerce.main-gate.appx.uz/dev/v1/category/${slug}`)
+            .then((response) => {
+                console.log(response.data)
+            })
+            .catch((error) => console.log(error))
     }
 }
 

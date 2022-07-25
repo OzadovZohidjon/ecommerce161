@@ -26,7 +26,7 @@ function ProductCart1({ product, addToCart, ...props }) {
                 <Box>
                     <Link to={`/product/${product.slug}`}>
                         <H5 mb='10px'>{product.name_uz}</H5>
-                        <SemiSpan>{product.description_uz}</SemiSpan>
+                        {/* <SemiSpan>{product.description_uz}</SemiSpan> */}
                     </Link>
                 </Box>
 

@@ -6,7 +6,7 @@ import productReducer from './productReducer'
 import productsReducer from './productsReducer'
 
 export const reducers = combineReducers({
-    products: productsReducer,
+    productsState: productsReducer,
     cartProducts: cartReducer,
     open: modalReducer,
     categories: categoriesReducer,

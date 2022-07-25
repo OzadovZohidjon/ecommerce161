@@ -1,77 +1,194 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Box, Container, Flex, Image } from '../components'
-import { H1, SemiSpan } from '../components/Typography'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import { Box, Container, Counter, Flex, Image, Loader } from '../components'
+import { BagIcon } from '../components/icons'
+import { ProductBtn } from '../components/ProductCarts/ProductCartStyle'
+import { H1, H3, SemiSpan, Span } from '../components/Typography'
+import {
+    addToCartAC,
+    decrementAC,
+    incrementAC,
+} from '../redux/reducers/cartReducer'
+import { getProduct, getAttributes } from '../redux/reducers/productReducer'
 
 export default function Product() {
-    const { product } = useSelector((state) => state)
+    const { product, loading, attributes } = useSelector(
+        (state) => state.product
+    )
+    const { cartProducts } = useSelector((state) => state)
+    const dispatch = useDispatch()
+    const location = useLocation()
     const [activeAttribute, setActiveAttribute] = useState([])
+    const [imageState, setImageState] = useState(null)
+    const [productIsCart, setProductIsCart] = useState(false)
 
     function activeAttributeHandler(attributeId, valueId) {
         let str = `${attributeId},${valueId}`
         setActiveAttribute([...activeAttribute, str])
-  }
-  
-    console.log(activeAttribute)
+    }
+
+    function imageHandler(image) {
+        setImageState(image)
+    }
+
+    function addToCart(product) {
+        dispatch(addToCartAC(product))
+
+        setProductIsCart(true)
+    }
+
+    function increment() {
+        dispatch(incrementAC(product.id))
+    }
+
+    function decrement() {
+        dispatch(decrementAC(product.id))
+    }
+
+    useEffect(() => {
+        dispatch(getProduct(location.pathname.split('/')[2]))
+        dispatch(getAttributes())
+    }, [location])
 
     return (
         <Container>
-            <Flex gap='25px'>
-                <Box w='50%'>
-                    <Image src={product.images[0]} />
-                </Box>
-                <Box w='49%' border='1px solid #E2E4EB' p='20px 25px'>
-                    <H1 color='#222A46' mb='5px'>
-                        {product.name_ru}
-                    </H1>
-                    <SemiSpan
-                        dangerouslySetInnerHTML={{
-                            __html: product.description_uz,
-                        }}
-                    ></SemiSpan>
+            {loading ? (
+                <Loader />
+            ) : (
+                <Flex gap='25px'>
+                    <Box w='50%'>
+                        <Box h='400px' mb='15px'>
+                            <Image src={imageState} objectFit='cover' />
+                        </Box>
 
-                    <Box mt='10px'>
-                        {product.attributes.map((attribute) => {
-                            return (
-                                <Box key={attribute.id} mb='10px'>
-                                    <SemiSpan>
-                                        {attribute.attribute_name_ru}
-                                    </SemiSpan>
-                                    <Flex flexWrap='wrap' gap='5px' mt='10px'>
-                                        {attribute.values.map((value) => {
-                                            return (
-                                                <Box
-                                                    key={value.value_id}
-                                                    p='6px 10px'
-                                                    border='1px solid #D0D2D7'
-                                                    background={
-                                                        activeAttribute.includes(
-                                                            `${attribute.id},${value.value_id}`
-                                                        )
-                                                            ? '#0093A2'
-                                                            : '#fff'
-                                                    }
-                                                    borderRadius='5px'
-                                                    onClick={() =>
-                                                        activeAttributeHandler(
-                                                            attribute.id,
-                                                            value.value_id
-                                                        )
-                                                    }
-                                                >
-                                                    <SemiSpan color='#353949'>
-                                                        {value.value_name_ru}
-                                                    </SemiSpan>
-                                                </Box>
-                                            )
-                                        })}
-                                    </Flex>
-                                </Box>
-                            )
-                        })}
+                        <Flex gap='10px'>
+                            {product?.images?.map((image, i) => {
+                                return (
+                                    <Box
+                                        key={i}
+                                        w='112px'
+                                        h='90px'
+                                        border={
+                                            image === imageState
+                                                ? '2px solid #e2195b'
+                                                : 0
+                                        }
+                                    >
+                                        <Image
+                                            src={image}
+                                            onClick={() => imageHandler(image)}
+                                            alt={product?.name_uz}
+                                        />
+                                    </Box>
+                                )
+                            })}
+                        </Flex>
+
+                        <Box mt='25px'>
+                            <Span
+                                dangerouslySetInnerHTML={{
+                                    __html: product?.description_uz,
+                                }}
+                            ></Span>
+                        </Box>
                     </Box>
-                </Box>
-            </Flex>
+                    <Box w='49%' border='1px solid #E2E4EB' p='20px 25px'>
+                        <H1 color='#222A46' mb='5px'>
+                            {product?.name_ru}
+                            <Span
+                                dangerouslySetInnerHTML={{
+                                    __html: product?.description_uz,
+                                }}
+                            ></Span>
+                        </H1>
+
+                        <Box mt='10px'>
+                            {attributes?.map((attribute) => {
+                                return (
+                                    <Box key={attribute.id} mb='10px'>
+                                        <SemiSpan>{attribute.name_ru}</SemiSpan>
+                                        <Flex
+                                            flexWrap='wrap'
+                                            gap='5px'
+                                            mt='10px'
+                                        >
+                                            {attribute?.attributeValues?.map(
+                                                (value) => {
+                                                    return (
+                                                        <Box
+                                                            key={value.id}
+                                                            p='6px 10px'
+                                                            border='1px solid #D0D2D7'
+                                                            background={
+                                                                activeAttribute.includes(
+                                                                    `${attribute.id},${value.id}`
+                                                                )
+                                                                    ? '#0093A2'
+                                                                    : '#fff'
+                                                            }
+                                                            borderRadius='5px'
+                                                            onClick={() =>
+                                                                activeAttributeHandler(
+                                                                    attribute.id,
+                                                                    value.id
+                                                                )
+                                                            }
+                                                        >
+                                                            <SemiSpan color='#353949'>
+                                                                {value.value_ru}
+                                                            </SemiSpan>
+                                                        </Box>
+                                                    )
+                                                }
+                                            )}
+                                        </Flex>
+                                    </Box>
+                                )
+                            })}
+                        </Box>
+
+                        <Flex
+                            alignItems='center'
+                            justifyContent='space-between'
+                            mt='30px'
+                        >
+                            <Box>
+                                <H3 fontWeight='700' color='#222A46' mb='5px'>
+                                    {product?.price} ₽
+                                </H3>
+                                <SemiSpan
+                                    color='#B0B2B9'
+                                    textDecoration='line-through'
+                                >
+                                    {product?.previous_price} ₽
+                                </SemiSpan>
+                            </Box>
+
+                            <Box>
+                                {productIsCart ? (
+                                    <Counter
+                                        qty={
+                                            cartProducts.filter(
+                                                (a) => a.id === product.id
+                                            )[0].qty
+                                        }
+                                        increment={increment}
+                                        decrement={decrement}
+                                    />
+                                ) : (
+                                    <ProductBtn
+                                        onClick={() => addToCart(product)}
+                                    >
+                                        <BagIcon />
+                                        <SemiSpan>В корзину</SemiSpan>
+                                    </ProductBtn>
+                                )}
+                            </Box>
+                        </Flex>
+                    </Box>
+                </Flex>
+            )}
         </Container>
     )
 }

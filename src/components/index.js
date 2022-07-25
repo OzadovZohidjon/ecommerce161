@@ -13,6 +13,7 @@ import ProductsList from './ProductsList/ProductList'
 import ProductCart1 from './ProductCarts/ProductCart1'
 import Counter from './Counter/Counter'
 import Dropdown from './Dropdown/Dropdown'
+import Loader from './Loading/Loader'
 
 export {
     Box,
@@ -30,4 +31,5 @@ export {
     Button,
     Counter,
     Dropdown,
+    Loader,
 }

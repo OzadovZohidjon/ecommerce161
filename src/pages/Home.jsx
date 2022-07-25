@@ -1,29 +1,41 @@
-import React from 'react'
-import { Box, Container, Title } from '../components'
+import React, { useEffect } from 'react'
 import ProductList from '../components/ProductsList/ProductList'
+import { Box, Container, Title, Loader } from '../components'
 import { addToCartAC } from '../utils/reducers/cartReducer'
 import { useSelector, useDispatch } from 'react-redux'
+import { getProducts } from '../redux/reducers/productsReducer'
 
 export default function Home() {
-    const { products } = useSelector((state) => state)
+    const { productsState } = useSelector((state) => state)
+    const { products, loading } = productsState
     const dispatch = useDispatch()
+
     function addToCart(product) {
         dispatch(addToCartAC(product))
     }
+
+    useEffect(() => {
+        dispatch(getProducts())
+    }, [])
+
     return (
         <>
             <Container>
-                <Box>
-                    <Title
-                        title='Букеты цветов с доставкой'
-                        path='/category/1'
-                    />
-                    <ProductList
-                        col={4}
-                        addToCart={addToCart}
-                        products={products}
-                    />
-                </Box>
+                {loading ? (
+                    <Loader />
+                ) : (
+                    <Box>
+                        <Title
+                            title='Букеты цветов с доставкой'
+                            path='/category/1'
+                        />
+                        <ProductList
+                            col={4}
+                            addToCart={addToCart}
+                            products={products}
+                        />
+                    </Box>
+                )}
             </Container>
         </>
     )
