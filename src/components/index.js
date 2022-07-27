@@ -14,6 +14,7 @@ import ProductCart1 from './ProductCarts/ProductCart1'
 import Counter from './Counter/Counter'
 import Dropdown from './Dropdown/Dropdown'
 import Loader from './Loading/Loader'
+import Sidebar from './Sidebar/Sidebar'
 
 export {
     Box,
@@ -32,4 +33,5 @@ export {
     Counter,
     Dropdown,
     Loader,
+    Sidebar,
 }

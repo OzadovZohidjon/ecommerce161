@@ -34,46 +34,73 @@ function Modal() {
                     </button>
                 </Flex>
 
-                <ModalPanelMid>
-                    <Box>
-                        {cartProducts.map((item, i) => {
-                            return (
-                                <ProductCart2
-                                    key={i}
-                                    product={item}
-                                    removeToCart={removeToCart}
-                                />
-                            )
-                        })}
-                    </Box>
-                </ModalPanelMid>
+                {cartProducts.length > 0 ? (
+                    <>
+                        <ModalPanelMid>
+                            <Box>
+                                {cartProducts.map((item, i) => {
+                                    return (
+                                        <ProductCart2
+                                            key={i}
+                                            product={item}
+                                            removeToCart={removeToCart}
+                                        />
+                                    )
+                                })}
+                            </Box>
+                        </ModalPanelMid>
 
-                <Box>
-                    <Flex
-                        justifyContent='space-between'
-                        alignItems='center'
-                        p='20px'
-                    >
-                        <H3 color='#1B1C21'>Итого:</H3>
-                        <H3 color='#1B1C21'>{sumAllPrice(cartProducts)} ₽</H3>
-                    </Flex>
+                        <Box>
+                            <Flex
+                                justifyContent='space-between'
+                                alignItems='center'
+                                p='20px'
+                            >
+                                <H3 color='#1B1C21'>Итого:</H3>
+                                <H3 color='#1B1C21'>
+                                    {sumAllPrice(cartProducts)} ₽
+                                </H3>
+                            </Flex>
 
+                            <Flex
+                                justifyContent='space-between'
+                                alignItems='center'
+                                p='20px'
+                                backgroundColor='#F2F6F7'
+                            >
+                                <Button onClick={() => modalHandler()}>
+                                    <Span>Продолжить покупки</Span>
+                                </Button>
+                                <Button onClick={() => modalHandler()}>
+                                    <Link to='/cart'>
+                                        <Span>Оформить заказ</Span>
+                                    </Link>
+                                </Button>
+                            </Flex>
+                        </Box>
+                    </>
+                ) : (
                     <Flex
-                        justifyContent='space-between'
+                        flexDirection='column'
                         alignItems='center'
-                        p='20px'
-                        backgroundColor='#F2F6F7'
+                        justifyContent='center'
+                        pt='150px'
                     >
-                        <Button onClick={() => modalHandler()}>
-                            <Span>Продолжить покупки</Span>
-                        </Button>
-                        <Button onClick={() => modalHandler()}>
-                            <Link to='/cart'>
-                                <Span>Оформить заказ</Span>
+                        <Span>Ничего не найдено.</Span>
+                        <Button
+                            mt='10px'
+                            p='13px 0'
+                            backgroundColor='#0093A2'
+                            borderRadius='5px'
+                            style={{ display: 'block' }}
+                            onClick={() => modalHandler()}
+                        >
+                            <Link to='/'>
+                                <Span color='#000'>Вернуться домой</Span>
                             </Link>
                         </Button>
                     </Flex>
-                </Box>
+                )}
             </ModalPanelStyle>
         </ModalStyle>
     )

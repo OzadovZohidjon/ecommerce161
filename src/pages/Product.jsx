@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import { Box, Container, Counter, Flex, Image, Loader } from '../components'
+import {
+    Box,
+    Container,
+    Counter,
+    Flex,
+    Image,
+    Loader,
+    Button,
+} from '../components'
 import { BagIcon } from '../components/icons'
 import { ProductBtn } from '../components/ProductCarts/ProductCartStyle'
 import { H1, H3, SemiSpan, Span } from '../components/Typography'
@@ -20,12 +28,26 @@ export default function Product() {
     const dispatch = useDispatch()
     const location = useLocation()
     const [activeAttribute, setActiveAttribute] = useState([])
-    const [imageState, setImageState] = useState(null)
+    const [imageState, setImageState] = useState(
+        product?.images?.find(() => true)
+    )
     const [productIsCart, setProductIsCart] = useState(false)
 
     function activeAttributeHandler(attributeId, valueId) {
-        let str = `${attributeId},${valueId}`
-        setActiveAttribute([...activeAttribute, str])
+        let isActiveAtribute = activeAttribute.some(
+            (item) => item.attributeId === attributeId
+        )
+        if (isActiveAtribute) {
+            setActiveAttribute(
+                activeAttribute.map((item) =>
+                    item.attributeId === attributeId
+                        ? { ...item, valueId: valueId }
+                        : item
+                )
+            )
+        } else {
+            setActiveAttribute([...activeAttribute, { attributeId, valueId }])
+        }
     }
 
     function imageHandler(image) {
@@ -34,7 +56,6 @@ export default function Product() {
 
     function addToCart(product) {
         dispatch(addToCartAC(product))
-
         setProductIsCart(true)
     }
 
@@ -49,7 +70,7 @@ export default function Product() {
     useEffect(() => {
         dispatch(getProduct(location.pathname.split('/')[2]))
         dispatch(getAttributes())
-    }, [location])
+    }, [])
 
     return (
         <Container>
@@ -59,7 +80,11 @@ export default function Product() {
                 <Flex gap='25px'>
                     <Box w='50%'>
                         <Box h='400px' mb='15px'>
-                            <Image src={imageState} objectFit='cover' />
+                            <Image
+                                src={imageState}
+                                objectFit='cover'
+                                alt={product?.name_uz}
+                            />
                         </Box>
 
                         <Flex gap='10px'>
@@ -107,7 +132,9 @@ export default function Product() {
                             {attributes?.map((attribute) => {
                                 return (
                                     <Box key={attribute.id} mb='10px'>
-                                        <SemiSpan>{attribute.name_ru}</SemiSpan>
+                                        <SemiSpan>
+                                            {attribute?.name_ru}
+                                        </SemiSpan>
                                         <Flex
                                             flexWrap='wrap'
                                             gap='5px'
@@ -116,13 +143,17 @@ export default function Product() {
                                             {attribute?.attributeValues?.map(
                                                 (value) => {
                                                     return (
-                                                        <Box
+                                                        <Button
                                                             key={value.id}
                                                             p='6px 10px'
                                                             border='1px solid #D0D2D7'
-                                                            background={
-                                                                activeAttribute.includes(
-                                                                    `${attribute.id},${value.id}`
+                                                            backgroundColor={
+                                                                activeAttribute.some(
+                                                                    (item) =>
+                                                                        item.attributeId ==
+                                                                            attribute.id &&
+                                                                        item.valueId ==
+                                                                            value.id
                                                                 )
                                                                     ? '#0093A2'
                                                                     : '#fff'
@@ -130,15 +161,29 @@ export default function Product() {
                                                             borderRadius='5px'
                                                             onClick={() =>
                                                                 activeAttributeHandler(
-                                                                    attribute.id,
-                                                                    value.id
+                                                                    attribute?.id,
+                                                                    value?.id
                                                                 )
                                                             }
                                                         >
-                                                            <SemiSpan color='#353949'>
+                                                            <SemiSpan
+                                                                color={
+                                                                    activeAttribute.some(
+                                                                        (
+                                                                            item
+                                                                        ) =>
+                                                                            item.attributeId ==
+                                                                                attribute.id &&
+                                                                            item.valueId ==
+                                                                                value.id
+                                                                    )
+                                                                        ? '#fff'
+                                                                        : '#353949'
+                                                                }
+                                                            >
                                                                 {value.value_ru}
                                                             </SemiSpan>
-                                                        </Box>
+                                                        </Button>
                                                     )
                                                 }
                                             )}

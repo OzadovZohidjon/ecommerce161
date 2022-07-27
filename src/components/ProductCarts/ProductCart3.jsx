@@ -38,11 +38,11 @@ function ProductCart3({ product, removeToCart, ...props }) {
                         </Button>
                     </Flex>
 
-                    <Box mb='15px'>
+                    {/* <Box mb='15px'>
                         <SemiSpan color='#505567'>
                             {product.description_uz}
                         </SemiSpan>
-                    </Box>
+                    </Box> */}
 
                     <Flex gap='24px'>
                         <Counter
