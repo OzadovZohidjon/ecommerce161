@@ -4,6 +4,7 @@ import Category from '../pages/Category'
 import Home from '../pages/Home'
 import Product from '../pages/Product'
 import { Navigate } from 'react-router-dom'
+import Profile from '../pages/Profile'
 
 export const routes = [
     {
@@ -36,5 +37,10 @@ export const routes = [
         id: 6,
         path: '*',
         component: <PageNotFound />,
+    },
+    {
+        id: 7,
+        path: '/profile',
+        component: <Profile />,
     },
 ]

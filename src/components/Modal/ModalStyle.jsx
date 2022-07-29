@@ -40,3 +40,13 @@ export const ModalPanelMid = styled.div`
     width: 100%;
     overflow-y: scroll;
 `
+
+export const AuthModalPanelStyle = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+`

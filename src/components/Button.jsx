@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { border, color, fontSize, space } from 'styled-system'
+import { border, color, display, fontSize, layout, space } from 'styled-system'
 
 export const Button = styled.button`
     background-color: transparent;
@@ -13,4 +13,6 @@ export const Button = styled.button`
     ${border};
     ${fontSize};
     ${space}
+    ${display}
+    ${layout}
 `

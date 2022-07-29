@@ -7,12 +7,13 @@ import { Span } from '../Typography'
 import { HeaderMidStyle } from './HeaderElements'
 import { useSelector, useDispatch } from 'react-redux'
 import logo from '../../assets/images/logo.svg'
+import { setCartModalAC } from '../../redux/reducers/modalReducer'
 
 function HeaderMid() {
     const { cartProducts } = useSelector((state) => state)
     const dispatch = useDispatch()
     function modalHandler() {
-        dispatch({ type: 'open' })
+        dispatch(setCartModalAC(true))
     }
     return (
         <HeaderMidStyle>

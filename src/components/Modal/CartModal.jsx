@@ -1,27 +1,31 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Flex, Box, Button } from '../index'
 import { CloseIcon } from '../icons'
 import { H3, H4, Span } from '../Typography'
 import { ModalPanelMid, ModalPanelStyle, ModalStyle } from './ModalStyle'
 import ProductCart2 from '../ProductCarts/ProductCart2'
-import Context from '../../context/Context'
 import { sumAllPrice } from '../../utils/helpers'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeToCartAC } from '../../utils/reducers/cartReducer'
-function Modal() {
-    const { open, cartProducts } = useSelector((state) => state)
+import { setCartModalAC } from '../../redux/reducers/modalReducer'
+
+function CartModal() {
+    const { modal, cartProducts } = useSelector((state) => state)
+    const { cartModal } = modal
     const dispatch = useDispatch()
+
     function modalHandler() {
-        dispatch({ type: 'close' })
+        dispatch(setCartModalAC(false))
     }
 
     function removeToCart(id) {
         dispatch(removeToCartAC(id))
     }
+
     return (
-        <ModalStyle open={open}>
-            <ModalPanelStyle open={open}>
+        <ModalStyle open={cartModal}>
+            <ModalPanelStyle open={cartModal}>
                 <Flex
                     justifyContent='space-between'
                     alignItems='center'
@@ -106,4 +110,4 @@ function Modal() {
     )
 }
 
-export default Modal
+export default CartModal
